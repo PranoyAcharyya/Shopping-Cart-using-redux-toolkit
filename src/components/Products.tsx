@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../app/hook'
 import { getProducts } from '../features/products/productSlice';
 import { Box, Button, CircularProgress, Container, Typography } from '@mui/material';
 import Productcard from './Productcard';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 
 

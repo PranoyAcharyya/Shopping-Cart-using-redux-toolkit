@@ -1,8 +1,8 @@
 // src/components/ProductCard.tsx
-import React, { useEffect } from "react";
+import React from "react";
 import type { Product } from "../features/products/productTypes";
 import { Card, CardContent, CardMedia, Typography, Button } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../app/hook";
+import { useAppDispatch} from "../app/hook";
 import { addToCart } from "../features/cart/cartSlice";
 import { toast } from "sonner";
 
@@ -13,7 +13,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const dispatch =useAppDispatch()
- const cartItems = useAppSelector((state) => state.cart.items);
+//  const cartItems = useAppSelector((state) => state.cart.items);
   
 //  useEffect(()=>{
 //   console.log(cartItems);

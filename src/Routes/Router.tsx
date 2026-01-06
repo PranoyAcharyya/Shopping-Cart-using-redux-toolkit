@@ -1,4 +1,3 @@
-import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import Products from "../components/Products";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useAppDispatch, useAppSelector } from "../app/hook";
 import {
   increaseQuantity,
@@ -47,7 +46,7 @@ const Cart = () => {
         ) : (
           <Grid container spacing={3}>
             {/* Cart Items */}
-            <Grid item xs={12} md={8}>
+            <Box>
               <Stack spacing={2}>
                 {cartItems.map((item) => (
                   <Card key={item.product.id} sx={{ display: "flex", mb: 2 }}>
@@ -122,10 +121,10 @@ const Cart = () => {
                   </Card>
                 ))}
               </Stack>
-            </Grid>
+            </Box>
 
             {/* Summary */}
-            <Grid item xs={12} md={4}>
+            <Box>
               <Card sx={{ p: 3, bgcolor: "white" }}>
                 <Typography variant="h6" fontWeight="bold" mb={2}>
                   Order Summary
@@ -156,7 +155,7 @@ const Cart = () => {
                   Checkout
                 </Button>
               </Card>
-            </Grid>
+            </Box>
           </Grid>
         )}
       </Box>
