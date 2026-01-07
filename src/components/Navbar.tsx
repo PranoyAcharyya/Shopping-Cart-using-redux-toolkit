@@ -1,66 +1,33 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
-import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useAppSelector } from '../app/hook';
 import CartDialog from './CartDialog';
 import { useNavigate } from 'react-router-dom';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+// import Autocomplete from '@mui/material/Autocomplete';
+// import { TextField } from '@mui/material';
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
 
 export default function PrimarySearchAppBar() {
   const cartItems = useAppSelector((state) => state.cart.items);
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const wishlistItems = useAppSelector((state) => state.wishlist.wishlistitems);
+  const wishlistCount = wishlistItems.length;
+  console.log(wishlistCount);
+  
 
   // State for cart dialog
   const [cartOpen, setCartOpen] = React.useState(false);
   const handleCartOpen = () => setCartOpen(true);
   const handleCartClose = () => setCartOpen(false);
   const navigate = useNavigate();
+  // const {items} = useAppSelector((state)=>state.products);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -74,12 +41,34 @@ export default function PrimarySearchAppBar() {
           </Typography>
 
           {/* Search */}
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
-          </Search>
+          {/* <Autocomplete
+      disablePortal
+      options={items}
+      getOptionLabel={(option)=>option.title}
+       sx={{
+    width: 300,
+    "& .MuiInputLabel-root": {
+      color: "#fff",
+    },
+    "& .MuiOutlinedInput-root": {
+      color: "#fff",
+      "& fieldset": {
+        borderColor: "#fff",
+      },
+      "&:hover fieldset": {
+        borderColor: "#fff",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#fff",
+      },
+    },
+    "& .MuiSvgIcon-root": {
+      color: "#fff",
+    },
+  }}
+      renderInput={(params) => <TextField {...params} label="products" />}
+
+    /> */}
 
           <Box sx={{ flexGrow: 1 }} />
 
@@ -91,6 +80,14 @@ export default function PrimarySearchAppBar() {
               </Badge>
             </IconButton>
           </Box>
+
+          {/* {widshlist icon} */}
+            <IconButton size="large" color="inherit" onClick={()=> navigate("/wishlist")}>
+              <Badge badgeContent={wishlistCount} color='error'>
+                <FavoriteIcon/>
+              </Badge>
+              
+          </IconButton>
 
           {/* Cart Icon Mobile */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

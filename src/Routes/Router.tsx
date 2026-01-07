@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Products from "../components/Products";
 import Cart from "../pages/Cart";
 import GlobalWrapper from "../Layout/GlobalWrapper";
+import Wishlist from "../pages/Wishlist";
 
 export const Router = createBrowserRouter([
     {
@@ -15,6 +16,9 @@ export const Router = createBrowserRouter([
             },{
                 path:"/cart",
                 element:<Cart/>
+            },{
+                path:"/wishlist",
+                element:<Wishlist/>
             }
         ]
     }  

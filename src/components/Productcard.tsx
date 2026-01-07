@@ -1,10 +1,12 @@
 // src/components/ProductCard.tsx
 import React from "react";
 import type { Product } from "../features/products/productTypes";
-import { Card, CardContent, CardMedia, Typography, Button } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, IconButton } from "@mui/material";
 import { useAppDispatch} from "../app/hook";
 import { addToCart } from "../features/cart/cartSlice";
 import { toast } from "sonner";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { addtoWishlist } from "../features/wishlist/wishlistSlice";
 
 interface ProductCardProps {
   product: Product;
@@ -20,8 +22,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 //  },[cartItems])
   
 
+
   return (
-    <Card sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+    <Card sx={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" , position:"relative"}}>
       <CardMedia
         component="img"
         image={product.image}
@@ -37,6 +40,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <Button variant="contained" color="primary" sx={{ m: 2 , backgroundColor:"#000"}} onClick={()=>dispatch(addToCart(product),toast(`${product.title} has been added to card`))}>
         Add to Cart
       </Button>
+      <IconButton size="large" color="inherit" sx={{position:"absolute",left:"10px",top:"10px"}} onClick={()=>dispatch(addtoWishlist(product),toast('added to wishlist'))}>
+          <FavoriteBorderIcon/>
+      </IconButton>
     </Card>
   );
 };
